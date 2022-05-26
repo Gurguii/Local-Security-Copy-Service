@@ -3,3 +3,5 @@ Permite crear un servicio que copiará los datos de un directorio ( en árbol ) 
 
 # Guía rápida
 La hago después que tengo que comer
+
+# Todavía está verde, tengo que mejorar muchas cosas
