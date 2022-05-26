@@ -5,5 +5,4 @@ if [[ $EUID != 0 ]]; then
   exit 0
 fi
 rm -r -f scripts && rm -f /etc/systemd/system/servicio && echo "Servicio eliminado :)" && rm $0
-echo "Hubo algun problema borrandoa algo"
 exit 0
