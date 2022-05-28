@@ -16,6 +16,8 @@ Permite crear un servicio que copiará los datos de un directorio ( en árbol ) 
 
 # Resultado
 Nos queda un directorio con los ficheros necesarios para crear nuevos servicios y dos directorios más, en ~ eliminar_Servicios ~ se guardarán los scripts para borrar los servicios creados. En ~ logs_Servicios ~ se guardarán los cambios realizados junto a la hora y día en el que se hizo.
+
 ![imagen](https://user-images.githubusercontent.com/101645735/170833579-d19eb087-fb06-460d-b6f0-3143e15c06fd.png)
+
 De aqui en adelante, cuando queramos eliminar un servicio, vamos a la carpeta eliminar_Servicios y ejecutamos el script que lleve el nombre del servicio que queremos eliminar.
 Cuando queramos añadir otro servicio ejecutaremos setup.sh y rellenaremos los datos.
