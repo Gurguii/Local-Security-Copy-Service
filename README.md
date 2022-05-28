@@ -26,7 +26,4 @@ De aqui en adelante, cuando queramos eliminar un servicio, vamos a la carpeta el
 Cuando queramos añadir otro servicio ejecutaremos setup.sh y rellenaremos los datos.
 
 # Cómo iniciar/parar el servicio
-Imaginemos un servicio de nombre ~ prueba ~
-Iniciar: sudo systemctl start prueba
-Parar: sudo systemctl stop prueba
-Comprobar estado: sudo systemctl status prueba
+Imaginemos un servicio de nombre ~ prueba ~  Iniciar: sudo systemctl start prueba  Parar: sudo systemctl stop prueba  Comprobar estado: sudo systemctl status prueba
