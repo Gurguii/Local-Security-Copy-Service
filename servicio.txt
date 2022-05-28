@@ -3,7 +3,6 @@ Description=Generador de Backups sencillito
 [Service]
 Type=simple
 ExecStart=inicioScript
-ExecStop=finScript
 RemainAfterExit=false
 [Install]
 WantedBy=multi-user.target
