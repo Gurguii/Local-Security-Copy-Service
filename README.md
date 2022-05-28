@@ -1,7 +1,7 @@
 # Servicio-para-hacer-CopiasDeSeguridad-Bash
 Permite crear un servicio que copiará los datos de un directorio ( en árbol ) en otro elegido por el usuario cada N minutos, siendo N un valor introducido por el usuario.
 
-# Guía rápida
+# ~ Guía rápida ~
 # Descargar el repositorio
 ![imagen](https://user-images.githubusercontent.com/101645735/170832485-49150e5a-a7b6-494d-8921-4eb2a3dc9092.png)
 
