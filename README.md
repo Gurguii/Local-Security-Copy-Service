@@ -24,3 +24,9 @@ Nos queda un directorio con los ficheros necesarios para crear nuevos servicios 
 
 De aqui en adelante, cuando queramos eliminar un servicio, vamos a la carpeta eliminar_Servicios y ejecutamos el script que lleve el nombre del servicio que queremos eliminar.
 Cuando queramos añadir otro servicio ejecutaremos setup.sh y rellenaremos los datos.
+
+# Cómo iniciar/parar el servicio
+Imaginemos un servicio de nombre ~ prueba ~
+Iniciar: sudo systemctl start prueba
+Parar: sudo systemctl stop prueba
+Comprobar estado: sudo systemctl status prueba
