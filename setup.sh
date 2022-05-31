@@ -38,6 +38,15 @@ while true; do
     break
   fi
 done
+while true; do
+  read -p "Numero maximo de ficheros de cambios: " maxLogs
+  if (( $maxLogs <= 0 )); then
+    printf "Tiene que haber al menos 1 fichero de cambios"
+    continue
+  else
+    break
+  fi
+done
 if [[ ${rutaScripts:(-1)} == "/" ]]; then
   rutaScripts=${rutaScripts:0:$((${#rutaScripts}-1))}
 fi
@@ -49,10 +58,10 @@ if [[ ${rutaBackup:(-1)} == "/" ]]; then
 fi
 #CREAR DIRECTORIO Y FICHERO 'LOGS'
 if [[ -e logs_Servicios && -d logs_Servicios ]]; then
-  touch logs_Servicios/servicio_$nombreServicio.txt
+  mkdir logs_Servicios/servicio_$nombreServicio
 else
   mkdir logs_Servicios
-  touch logs_Servicios/servicio_$nombreServicio.txt
+  mkdir logs_Servicios/servicio_$nombreServicio
 fi
 #CREAR DIRECTORIO Y FICHERO 'ELIMINAR SERVICIOS'
 if [[ -e eliminar_Servicios && -d eliminar_Servicios ]]; then
@@ -61,14 +70,19 @@ else
   mkdir eliminar_Servicios
   touch eliminar_Servicios/eliminar_$nombreServicio.sh
 fi
+
 #CREAR SCRIPT INICIO
-cat script_inicio.sh | sed "0,/copiar/s||$rutaCopia|" | sed "/pegar/s||$rutaBackup/|" | sed "0,/tiempo/s||$(($tiempo*60))|" | sed "/rutaLogs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio.txt|" >> $rutaScripts/inicio_servicio_$nombreServicio.sh
+cat script_inicio.sh | sed "/copiar/s||$rutaCopia|" | sed "/pegar/s||$rutaBackup/|" | sed "/tiempo/s||$(($tiempo*60))|" | sed "/rutaLogs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" | sed "0,/maxLogs/s||$maxLogs|" >> $rutaScripts/inicio_servicio_$nombreServicio.sh
 sudo chmod +x $rutaScripts/inicio_servicio_$nombreServicio.sh
+
 #CREAR SCRIPT ELIMINAR SERVICIO
-cat eliminar_servicio.sh | sed "0,/scripts/s||$rutaScripts/inicio_servicio_$nombreServicio.sh|" | sed "0,/nombre/s||$nombreServicio|" | sed "0,/logs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio.txt|" >> $(pwd)/eliminar_Servicios/eliminar_$nombreServicio.sh
+cat eliminar_servicio.sh | sed "0,/scripts/s||$rutaScripts/inicio_servicio_$nombreServicio.sh|" | sed "0,/nombre/s||$nombreServicio|" | sed "0,/logs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" >> $(pwd)/eliminar_Servicios/eliminar_$nombreServicio.sh
 echo "[!] Scripts de inicio y fin creados"
+
 #CREAR SERVICIO
 cat servicio.txt | sed "0,/inicioScript/s||$rutaScripts/inicio_servicio_$nombreServicio.sh|" | sed "0,/finScript/s||$rutaScripts/fin_servicio_$nombreServicio|" >> /etc/systemd/system/$nombreServicio.service
 echo "[!] Servicio creado"
 sudo systemctl daemon-reload
+
+#FIN
 echo 'Todo listo :)'
