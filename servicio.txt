@@ -1,5 +1,5 @@
 [Unit]
-Description=Generador de Backups sencillito
+Description=Generador de Copias de Seguridad sencillito
 [Service]
 Type=simple
 ExecStart=inicioScript
