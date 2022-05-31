@@ -13,7 +13,7 @@ Es necesario tener instalado rsync => sudo apt install rsync (para Ubuntu)
 ![imagen](https://user-images.githubusercontent.com/101645735/170832530-f6ab2ca5-c058-4568-8f83-2ace21d05ecb.png)
 
 # Rellenamos los datos que nos pide
-![imagen](https://user-images.githubusercontent.com/101645735/170832575-7b47de16-f3c3-4985-b023-9e846898b622.png)
+![imagen](https://user-images.githubusercontent.com/101645735/171176950-52b99af6-c766-41c1-a5c5-351312b7e40c.png)
 
 # Resultado
 Nos queda un directorio con los ficheros necesarios para crear nuevos servicios y dos directorios más, en ~ eliminar_Servicios ~ se guardarán los scripts para borrar los servicios creados. En ~ logs_Servicios ~ se guardarán los cambios realizados junto a la hora y día en el que se hizo.
