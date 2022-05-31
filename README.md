@@ -28,3 +28,5 @@ Imaginemos un servicio de nombre ~ prueba ~
 Iniciar: sudo systemctl start prueba  
 Parar: sudo systemctl stop prueba  
 Comprobar estado: sudo systemctl status prueba
+
+que tengas un buen día :)
