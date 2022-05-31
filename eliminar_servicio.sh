@@ -5,7 +5,7 @@ if [[ $EUID != 0 ]]; then
 fi
 read -p "Estas segur@? s/n : " check
 if [[ $check == "s" || $check == "S" ]]; then
-  rm -r -f scripts && rm -f /etc/systemd/system/nombre.service && rm -f logs && echo "Servicio eliminado :)" && rm $0
+  rm -r -f scripts && rm -f /etc/systemd/system/nombre.service && rm -r -f logs && echo "Servicio eliminado :)" && rm $0
 else
   exit 0
 fi
