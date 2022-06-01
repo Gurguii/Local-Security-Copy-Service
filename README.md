@@ -19,7 +19,7 @@ sudo bash setup.sh
 ![imagen](https://user-images.githubusercontent.com/101645735/170832530-f6ab2ca5-c058-4568-8f83-2ace21d05ecb.png)
 
 # Rellenamos los datos que nos pide
-En el caso de las rutas, de no existir, el programa nos pregunta si queremos que cree dicha ruta, asi que no es necesario tenerlas creadas.
+En el caso de las rutas, de no existir, el programa nos pregunta si queremos que cree dicha ruta (los directorios necesarios para que exista), asi que no es necesario tenerlas creadas.
 
 ![imagen](https://user-images.githubusercontent.com/101645735/171507719-fe878199-4067-41f6-ad99-6ea022eeb5eb.png)
 
