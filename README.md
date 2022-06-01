@@ -24,7 +24,13 @@ En el caso de las rutas, de no existir, el programa nos pregunta si queremos que
 ![imagen](https://user-images.githubusercontent.com/101645735/171507719-fe878199-4067-41f6-ad99-6ea022eeb5eb.png)
 
 # Resultado
-Nos queda un directorio con los ficheros necesarios para crear nuevos servicios y dos directorios más, en ~ eliminar_Servicios ~ se guardarán los scripts para borrar los servicios creados. En ~ logs_Servicios ~ habrá un directorio por cada servicio creado, éste tendrá dentro los ficheros de logs.
+Nos quedamos con los 4 ficheros para generar nuevos servicios y 3 directorios:  
+
+eliminar_Servicios => Guarda un script para cada servicio creado. El script se encargará de eliminar los ficheros creados para el servicio y el propio servicio, aunque no eliminará la Copia de Seguridad.  
+
+logs_Servicios => Dentro se creará un directorio por cada servicio creado. Cada directorio tendrá los logs de las copias que se vayan haciendo, en caso de elegir en setup.sh un máximo de 3 logs, el programa se encargará de, al tener ese máximo, eliminar el log más antiguo y añadir el nuevo.  
+
+scripts_servicios => Dentro de este directorio se guardarán todos los scripts (1 por servicio) de los servicios creados.
 
 ![imagen](https://user-images.githubusercontent.com/101645735/170833579-d19eb087-fb06-460d-b6f0-3143e15c06fd.png)
 
