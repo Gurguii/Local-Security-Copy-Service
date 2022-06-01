@@ -13,6 +13,7 @@ Es necesario tener instalado rsync => sudo apt install rsync (para Ubuntu)
 ![imagen](https://user-images.githubusercontent.com/101645735/170832530-f6ab2ca5-c058-4568-8f83-2ace21d05ecb.png)
 
 # Rellenamos los datos que nos pide
+En el caso de las rutas, de no existir, el programa nos pregunta si queremos que cree dicha ruta, asi que no es necesario tenerlas creadas.
 ![imagen](https://user-images.githubusercontent.com/101645735/171176950-52b99af6-c766-41c1-a5c5-351312b7e40c.png)
 
 # Resultado
