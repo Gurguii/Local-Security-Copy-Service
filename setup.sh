@@ -19,15 +19,36 @@ while true; do
 done
 read -p "Ruta a copiar: " rutaCopia
 if [[ ! -e $rutaCopia || ! -d $rutaCopia ]]; then
-  mkdir $rutaCopia
+  printf "La ruta %s no existe " $rutaCopia
+  read -p "¿Crear? s/n: " rsp
+  if [[ ${rsp,,} == "s" || ${rsp,,} == "si" ]]; then
+    mkdir -p $rutaCopia && printf "[!] Ruta creada\n"
+  else
+    printf "Saliendo..."
+    exit 0
+  fi
 fi
 read -p "Ruta de copia: " rutaBackup
 if [[ ! -e $rutaBackup || ! -d $rutaBackup ]]; then
-  mkdir $rutaBackup
+  printf "La ruta %s no existe " $rutaCopia
+  read -p "¿Crear? s/n: " rsp
+  if [[ ${rsp,,} == "s" || ${rsp,,} == "si" ]]; then
+    mkdir -p $rutaBackup && printf "[!] Ruta creada\n"
+  else
+    printf "Saliendo..."
+    exit 0
+  fi
 fi
 read -p "Ruta para guardar los scripts: " rutaScripts
 if [[ ! -e $rutaScripts || ! -d $rutaScripts ]]; then
-  mkdir $rutaScripts
+  printf "La ruta %s no existe " $rutaScripts
+  read -p "¿Crear? s/n: " rsp
+  if [[ ${rsp,,} == "s" || ${rsp,,} == "si" ]]; then
+    mkdir -p $rutaScripts && printf "[!] Ruta creada\n"
+  else
+    printf "Saliendo..."
+    exit 0
+  fi
 fi
 while true; do
   read -p "Tiempo entre copias(minutos): " tiempo
@@ -39,7 +60,7 @@ while true; do
   fi
 done
 while true; do
-  read -p "Numero maximo de ficheros de cambios: " maxLogs
+  read -p "Numero maximo de logs: " maxLogs
   if (( $maxLogs <= 0 )); then
     printf "Tiene que haber al menos 1 fichero de cambios"
     continue
@@ -47,6 +68,7 @@ while true; do
     break
   fi
 done
+
 if [[ ${rutaScripts:(-1)} == "/" ]]; then
   rutaScripts=${rutaScripts:0:$((${#rutaScripts}-1))}
 fi
@@ -56,6 +78,7 @@ fi
 if [[ ${rutaBackup:(-1)} == "/" ]]; then
   rutaBackup=${rutaBackup:0:$((${#rutaBackup}-1))}
 fi
+
 #CREAR DIRECTORIO Y FICHERO 'LOGS'
 if [[ -e logs_Servicios && -d logs_Servicios ]]; then
   mkdir logs_Servicios/servicio_$nombreServicio
@@ -73,7 +96,7 @@ fi
 
 #CREAR SCRIPT INICIO
 cat script_inicio.sh | sed "/copiar/s||$rutaCopia|" | sed "/pegar/s||$rutaBackup/|" | sed "/tiempo/s||$(($tiempo*60))|" | sed "/rutaLogs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" | sed "0,/maxLogs/s||$maxLogs|" >> $rutaScripts/inicio_servicio_$nombreServicio.sh
-sudo chmod +x $rutaScripts/inicio_servicio_$nombreServicio.sh
+sudo chmod u+x $rutaScripts/inicio_servicio_$nombreServicio.sh
 
 #CREAR SCRIPT ELIMINAR SERVICIO
 cat eliminar_servicio.sh | sed "0,/scripts/s||$rutaScripts/inicio_servicio_$nombreServicio.sh|" | sed "0,/nombre/s||$nombreServicio|" | sed "0,/logs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" >> $(pwd)/eliminar_Servicios/eliminar_$nombreServicio.sh
