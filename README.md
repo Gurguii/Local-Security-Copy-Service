@@ -32,7 +32,7 @@ logs_Servicios => Dentro se creará un directorio por cada servicio creado. Cada
 
 scripts_servicios => Dentro de este directorio se guardarán todos los scripts (1 por servicio) de los servicios creados.
 
-![imagen](https://user-images.githubusercontent.com/101645735/170833579-d19eb087-fb06-460d-b6f0-3143e15c06fd.png)
+![imagen](https://user-images.githubusercontent.com/101645735/171511536-5305b5b9-df9f-4150-be43-8c0e2f0d3bde.png)
 
 De aqui en adelante, cuando queramos eliminar un servicio, vamos a la carpeta eliminar_Servicios y ejecutamos el script que lleve el nombre del servicio que queremos eliminar.
 Cuando queramos añadir otro servicio ejecutaremos setup.sh y rellenaremos los datos.
