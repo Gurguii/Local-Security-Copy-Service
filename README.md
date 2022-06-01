@@ -20,7 +20,8 @@ sudo bash setup.sh
 
 # Rellenamos los datos que nos pide
 En el caso de las rutas, de no existir, el programa nos pregunta si queremos que cree dicha ruta, asi que no es necesario tenerlas creadas.
-![imagen](https://user-images.githubusercontent.com/101645735/171176950-52b99af6-c766-41c1-a5c5-351312b7e40c.png)
+
+![imagen](https://user-images.githubusercontent.com/101645735/171423708-5590c830-3a1a-4200-af9a-f00afb776c5b.png)
 
 # Resultado
 Nos queda un directorio con los ficheros necesarios para crear nuevos servicios y dos directorios más, en ~ eliminar_Servicios ~ se guardarán los scripts para borrar los servicios creados. En ~ logs_Servicios ~ habrá un directorio por cada servicio creado, éste tendrá dentro los ficheros de logs.
