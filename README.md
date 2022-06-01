@@ -4,15 +4,15 @@ Es necesario tener instalado rsync => sudo apt install rsync (para Ubuntu)
 
 # ~ Guía rápida ~
 # Descargar el repositorio
-sudo git clone https://github.com/Gurguii/Servicio-para-hacer-CopiasDeSeguridad-Bash.git
+sudo git clone https://github.com/Gurguii/Servicio-para-hacer-CopiasDeSeguridad-Bash.git  
 ![imagen](https://user-images.githubusercontent.com/101645735/170832485-49150e5a-a7b6-494d-8921-4eb2a3dc9092.png)
 
 # Entramos en el directorio descargado
-cd Servicio-para-hacer-CopiasDeSeguridad-Bash/
+cd Servicio-para-hacer-CopiasDeSeguridad-Bash/  
 ![imagen](https://user-images.githubusercontent.com/101645735/170832506-81228cd6-2b30-454c-b1af-18f61f3363fc.png)
 
 # Ejecutamos el setup.sh con permisos de administrador
-sudo bash setup.sh
+sudo bash setup.sh  
 ![imagen](https://user-images.githubusercontent.com/101645735/170832530-f6ab2ca5-c058-4568-8f83-2ace21d05ecb.png)
 
 # Rellenamos los datos que nos pide
