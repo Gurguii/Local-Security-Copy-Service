@@ -1,66 +1,66 @@
 #!/bin/bash
 if [[ $EUID != 0 ]]; then
-  printf "Por favor ejecuta el script con permisos de administrador\n"
+  printf "[!] Please execute the script with sudo privileges\n"
   printf "sudo bash %s\n" $0
   exit 0
 fi
 if [[ ! $(command -v rsync) ]]; then
-  printf "No tienes rsync instalado\nsudo apt install rsync"
+  printf "[!] Seems like you don't have rsync installed\nsudo apt install rsync"
 fi
-printf "~ Ronda de preguntas ~\n"
+printf "     ~ Info ~\n"
 while true; do
-  read -p "Nombre del servicio: " nombreServicio
+  read -p "Service name: " nombreServicio
   if [[ -e /etc/systemd/system/$nombreServicio.service ]]; then
-    printf "Ya existe un servicio llamado %s\n" $nombreServicio
+    printf "[!] There is a service called %s already\n" $nombreServicio
     continue
   else
     break
   fi
 done
-read -p "Ruta a copiar: " rutaCopia
+read -p "Path to copy: " rutaCopia
 if [[ ! -e $rutaCopia || ! -d $rutaCopia ]]; then
-  printf "La ruta %s no existe" $rutaCopia
-  read -p "¿Crear? s/n: " rsp
-  if [[ ${rsp,,} == "s" || ${rsp,,} == "si" ]]; then
-    mkdir -p $rutaCopia && printf "[!] Ruta creada\n"
+  printf "[!] Path %s does not exist" $rutaCopia
+  read -p "Create y/n: " rsp
+  if [[ ${rsp,,} == "y" || ${rsp,,} == "yes" ]]; then
+    mkdir -p $rutaCopia && printf "[!] Path created\n"
   else
-    printf "Saliendo..."
+    printf "Exiting..."
     exit 0
   fi
 fi
-read -p "Ruta de copia: " rutaBackup
+read -p "Path to save the copy: " rutaBackup
 if [[ ! -e $rutaBackup || ! -d $rutaBackup ]]; then
-  printf "La ruta %s no existe" $rutaCopia
-  read -p "¿Crear? s/n: " rsp
-  if [[ ${rsp,,} == "s" || ${rsp,,} == "si" ]]; then
-    mkdir -p $rutaBackup && printf "[!] Ruta creada\n"
+  printf "[!] Path %s does not exist" $rutaCopia
+  read -p "Create y/n: " rsp
+  if [[ ${rsp,,} == "y" || ${rsp,,} == "yes" ]]; then
+    mkdir -p $rutaBackup && printf "[!] Path created\n"
   else
-    printf "Saliendo..."
+    printf "Exiting..."
     exit 0
   fi
 fi
-if [[ ! -e scripts_servicios || ! -d scripts_servicios ]]; then
-  mkdir $(pwd)/scripts_servicios
+if [[ ! -e .servicesScripts || ! -d .servicesScripts ]]; then
+  mkdir $(pwd)/.servicesScripts
 fi
 while true; do
-  read -p "Tiempo entre copias(minutos): " tiempo
+  read -p "Time between copies(minutes): " tiempo
   if (( $tiempo <= 0 )); then
-    printf "El tiempo ha de ser positivo y 1 como minimo\n"
+    printf "[!] Time must be 1 or higher\n"
     continue
   else
     break
   fi
 done
 while true; do
-  read -p "Numero maximo de logs: " maxLogs
+  read -p "Max logs: " maxLogs
   if (( $maxLogs <= 0 )); then
-    printf "Tiene que haber al menos 1 fichero de cambios"
+    printf "[!] There must be at least 1 log file"
     continue
   else
     break
   fi
 done
-
+scriptPath=$(pwd)/.servicesScripts/$nombreServicio.sh
 if [[ ${rutaCopia:(-1)} == "/" ]]; then
   rutaCopia=${rutaCopia:0:$((${#rutaCopia}-1))}
 fi
@@ -68,33 +68,31 @@ if [[ ${rutaBackup:(-1)} == "/" ]]; then
   rutaBackup=${rutaBackup:0:$((${#rutaBackup}-1))}
 fi
 
-#CREAR DIRECTORIO Y FICHERO 'LOGS'
-if [[ -e logs_Servicios && -d logs_Servicios ]]; then
-  mkdir logs_Servicios/servicio_$nombreServicio
+if [[ -e servicesLogs && -d servicesLogs ]]; then
+  mkdir servicesLogs/$nombreServicio.log
 else
-  mkdir logs_Servicios
-  mkdir logs_Servicios/servicio_$nombreServicio
-fi
-#CREAR DIRECTORIO Y FICHERO 'ELIMINAR SERVICIOS'
-if [[ -e eliminar_Servicios && -d eliminar_Servicios ]]; then
-  touch eliminar_Servicios/eliminar_$nombreServicio.sh
-else
-  mkdir eliminar_Servicios
-  touch eliminar_Servicios/eliminar_$nombreServicio.sh
+  mkdir servicesLogs
+  mkdir servicesLogs/$nombreServicio.log
 fi
 
-#CREAR SCRIPT INICIO
-cat script_inicio.sh | sed "/copiar/s||$rutaCopia|" | sed "/pegar/s||$rutaBackup/|" | sed "/tiempo/s||$(($tiempo*60))|" | sed "/rutaLogs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" | sed "0,/maxLogs/s||$maxLogs|" >> $(pwd)/scripts_servicios/script_$nombreServicio.sh
-sudo chmod u+x $(pwd)/scripts_servicios/script_$nombreServicio.sh
+if [[ -e deleteServices && -d deleteServices ]]; then
+  touch deleteServices/$nombreServicio.sh
+else
+  mkdir deleteServices
+  touch deleteServices/$nombreServicio.sh
+fi
 
-#CREAR SCRIPT ELIMINAR SERVICIO
-cat eliminar_servicio.sh | sed "0,/scripts/s||$(pwd)/scripts_servicios/script_$nombreServicio.sh|" | sed "0,/nombre/s||$nombreServicio|" | sed "0,/logs/s||$(pwd)/logs_Servicios/servicio_$nombreServicio|" >> $(pwd)/eliminar_Servicios/eliminar_$nombreServicio.sh
-echo "[!] Scripts de inicio y fin creados"
+# Create service script
+cat .service_script.sh | sed "/copiar/s||$rutaCopia|" | sed "/pegar/s||$rutaBackup/|" | sed "/tiempo/s||$(($tiempo*60))|" | sed "/rutaLogs/s||$(pwd)/servicesLogs/$nombreServicio.log|" | sed "0,/maxLogs/s||$maxLogs|" >> $scriptPath
+sudo chmod u+x $scriptPath
 
-#CREAR SERVICIO
-cat servicio.txt | sed "0,/inicioScript/s||$(pwd)/scripts_servicios/script_$nombreServicio.sh|" >> /etc/systemd/system/$nombreServicio.service
-echo "[!] Servicio creado"
+# Create delete_service script
+cat .delete_service.sh | sed "0,/scripts/s||$scriptPath|" | sed "0,/nombre/s||$nombreServicio|" | sed "0,/logs/s||$(pwd)/servicesLogs/$nombreServicio.log|" >> $(pwd)/deleteServices/$nombreServicio.sh
+echo "[!] Service script created"
+
+# Create service file
+cat .service.info | sed "0,/inicioScript/s||$scriptPath|" >> /etc/systemd/system/$nombreServicio.service
+echo "[!] Service created"
 sudo systemctl daemon-reload
-
-#FIN
-echo 'Todo listo :)'
+echo "[!] Systemd manager configuration reloaded"
+echo 'DONE'
