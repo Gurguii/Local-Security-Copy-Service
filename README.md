@@ -1,6 +1,6 @@
 
-# Requisitos
-Es necesario tener instalado rsync => sudo apt install rsync (para Ubuntu)
+# Requirements
+You must have rsync installed => sudo apt install rsync (Ubuntu)
 
 # ~ Guía rápida ~
 # Download the repository
