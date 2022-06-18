@@ -1,5 +1,5 @@
 [Unit]
-Description=Generador de Copias de Seguridad sencillito
+Description=Security Copy service by Gurguii 
 [Service]
 Type=simple
 ExecStart=inicioScript
