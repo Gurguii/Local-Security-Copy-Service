@@ -1,11 +1,11 @@
 #!/bin/bash
 if [[ $EUID != 0 ]]; then
-  printf "Necesito que me ejecutes con permisos de administrador\nsudo bash %s\n" $0
+  printf "I need to be executed with sudo privileges\nsudo bash %s\n" $0
   exit 0
 fi
-read -p "Estas segur@? s/n : " check
-if [[ $check == "s" || $check == "S" ]]; then
-  rm -r -f scripts && rm -f /etc/systemd/system/nombre.service && rm -r -f logs && echo "Servicio eliminado :)" && rm $0
+read -p "[!] Sure y/n: " check
+if [[ ${check,,} == "y" || ${check,,} == "yes" ]]; then
+  rm -r -f scripts && rm -f /etc/systemd/system/nombre.service && rm -r -f logs && echo "[!] Service successfuly deleted" && rm $0
 else
   exit 0
 fi
