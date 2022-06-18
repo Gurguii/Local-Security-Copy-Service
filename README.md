@@ -2,7 +2,7 @@
 # Requirements
 You must have rsync installed => sudo apt install rsync (Ubuntu)
 
-# ~ Guía rápida ~
+# ~ Quick guide ~
 # Download the repository
 sudo git clone https://github.com/Gurguii/Servicio-para-hacer-CopiasDeSeguridad-Bash.git  
 
@@ -27,11 +27,11 @@ If a given path does not exist, the script will ask before creating missing dire
 # Result
 We are now left with 2 visible directories and the setup.sh file:  
 
-eliminar_Servicios => Guarda un script para cada servicio creado. El script se encargará de eliminar los ficheros creados para el servicio y el propio servicio, aunque no eliminará la Copia de Seguridad.  
+deleteServices => Guarda un script para cada servicio creado. El script se encargará de eliminar los ficheros creados para el servicio y el propio servicio, aunque no eliminará la Copia de Seguridad.  
 
-logs_Servicios => Dentro se creará un directorio por cada servicio creado. Cada directorio tendrá los logs de las copias que se vayan haciendo, en caso de elegir en setup.sh un máximo de 3 logs, el programa se encargará de, al tener ese máximo, eliminar el log más antiguo y añadir el nuevo.  
+servicesLogs => Dentro se creará un directorio por cada servicio creado. Cada directorio tendrá los logs de las copias que se vayan haciendo, en caso de elegir en setup.sh un máximo de 3 logs, el programa se encargará de, al tener ese máximo, eliminar el log más antiguo y añadir el nuevo.  
 
-scripts_servicios => Dentro de este directorio se guardarán todos los scripts (1 por servicio) de los servicios creados.
+servicesScripts => In this directory service scripts will be saved (1 per service)
 
 ![imagen](https://user-images.githubusercontent.com/101645735/171511536-5305b5b9-df9f-4150-be43-8c0e2f0d3bde.png)
 
