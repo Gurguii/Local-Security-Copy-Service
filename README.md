@@ -4,34 +4,28 @@ You must have rsync installed => sudo apt install rsync (Ubuntu)
 
 # ~ Quick guide ~
 # Download the repository
-sudo git clone https://github.com/Gurguii/Servicio-para-hacer-CopiasDeSeguridad-Bash.git  
-
-![imagen](https://user-images.githubusercontent.com/101645735/170832485-49150e5a-a7b6-494d-8921-4eb2a3dc9092.png)
+sudo git clone https://github.com/Gurguii/Local-Security-Copy-Service  
 
 # Get into the repo directory
-cd Servicio-para-hacer-CopiasDeSeguridad-Bash/  
+cd Local-Security-Copy-Service  
 
-![imagen](https://user-images.githubusercontent.com/101645735/170832506-81228cd6-2b30-454c-b1af-18f61f3363fc.png)
+![imagen](https://user-images.githubusercontent.com/101645735/174479659-133ace4c-be76-40e7-b1d4-ab2224faba2c.png)
 
-# Execute setup.sh with privileges
+
+# Execute setup.sh with privileges and give necessary info about the service
 sudo bash setup.sh  
-If you forget it's all good, the script will let you know :)  
 
-![imagen](https://user-images.githubusercontent.com/101645735/170832530-f6ab2ca5-c058-4568-8f83-2ace21d05ecb.png)
-
-# Give necessary info
-If a given path does not exist, the script will ask before creating missing directories
-
-![imagen](https://user-images.githubusercontent.com/101645735/171507719-fe878199-4067-41f6-ad99-6ea022eeb5eb.png)
+![imagen](https://user-images.githubusercontent.com/101645735/174479735-6becbe25-1eff-4236-84f4-95c6f36fe756.png)
 
 # Result
-We are now left with 2 visible directories and the setup.sh file:  
+We are now left with 2 visible directories and the setup.sh file (not counting README and LICENSE):   
 
-deleteServices => Guarda un script para cada servicio creado. El script se encargará de eliminar los ficheros creados para el servicio y el propio servicio, aunque no eliminará la Copia de Seguridad.  
+deleteServices => Has a script for each service <ServiceName.sh>. By executing it, every file created for that service will be deleted.
 
-servicesLogs => Dentro se creará un directorio por cada servicio creado. Cada directorio tendrá los logs de las copias que se vayan haciendo, en caso de elegir en setup.sh un máximo de 3 logs, el programa se encargará de, al tener ese máximo, eliminar el log más antiguo y añadir el nuevo.  
+servicesLogs => Has a directory for each created service which will store the service's logs. Each log file has the $date of the copy and some info about the copy made.  
+![imagen](https://user-images.githubusercontent.com/101645735/174480607-70d3d598-87ba-472d-95c8-ce821acf0b06.png)
 
-servicesScripts => In this directory service scripts will be saved (1 per service)
+.servicesScripts => This directory will be left hidden (notice the . right before the name). It will store the service script <ServiceName.sh>.
 
 ![imagen](https://user-images.githubusercontent.com/101645735/171511536-5305b5b9-df9f-4150-be43-8c0e2f0d3bde.png)
 
@@ -40,8 +34,5 @@ Whenever you feel like adding a new service you can just execute setup.sh and gi
 
 # How to start/stop/check status of a service
 Given a service called <gurgui>  
-Start: sudo systemctl start gurgui  
-Stop: sudo systemctl stop gurgui  
-Check status: sudo systemctl status gurgui
-
-Have a good day :)
+sudo systemctl <start | stop | check> <ServiceName> 
+Note: As long as I know you don't have to add .service
