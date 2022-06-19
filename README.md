@@ -28,9 +28,6 @@ servicesLogs => Has a directory for each created service which will store the se
 
 .servicesScripts => This directory will be left hidden (notice the . right before the name). It will store the service script <ServiceName.sh>.
 
-From now on, whenever you want to delete a service, go to delete_Services directory and execute the script whose name is the same as the service you want to delete.
-Whenever you feel like adding a new service you can just execute setup.sh and give info asked.
-
 # How to start/stop/check status of a service
 Given a service called <gurgui>  
 sudo systemctl < start | stop | check > <ServiceName> 
