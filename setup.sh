@@ -1,7 +1,6 @@
 #!/bin/bash
 if [[ $EUID != 0 ]]; then
-  printf "[!] Please execute the script with sudo privileges\n"
-  printf "sudo bash %s\n" "$0"
+  printf "[!] Please execute the script with sudo privileges\nsudo bash %s\n" "$0"
   exit 0
 fi
 if [[ ! $(command -v rsync) ]]; then
