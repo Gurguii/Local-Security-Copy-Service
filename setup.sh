@@ -3,6 +3,13 @@ if [[ $EUID != 0 ]]; then
   printf "[!] Please execute the script with sudo privileges\nsudo bash %s\n" "$0"
   exit 0
 fi
+if [[ $1 == '--delete' || $1 == '-del' ]]; then
+  for servname in $(ls deleteServices | cut -d '.' -f1); do
+    rm /etc/systemd/system/$servname.service
+  done
+  printf "[!] Local Security Copy Service fully deleted\n" && rm -r -f "$(pwd)/../Local-Security-Copy-Service"
+  exit 0
+fi
 if [[ ! $(command -v rsync) ]]; then
   printf "[!] Seems like you don't have rsync installed\nsudo apt install rsync"
 fi
