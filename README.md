@@ -10,7 +10,15 @@ rsync: lets you transfer files and directories to local and remote destinations.
 
 
 
-
+## Before starting
+The script has -del / --delete option, which will delete every file created by the script (except copies) including Local-Security-Service directory.  
+Basicly 'unistalling' the repo.
+```bash
+  sudo bash setup.sh --delete
+```
+```bash
+  sudo bash setup.sh -del
+```
 ## Run locally
 
 Clone the project
@@ -32,23 +40,3 @@ In case path doesn't exist, the script is able to create those missing directori
 If you have ran setup.sh at least once you will notice 2 new directories: servicesLogs & deleteServices.  
 - servicesLogs: stores a directory for each service created whose content will be an incremental file list
 - deleteServices: stores a script for each service created which will delete every file created by setup.sh for that service.
-# Testing it
-### Running the script and filling asked info
-```bash
-    sudo bash setup.sh
-```
-
-### Check copy from & copy to paths before starting the service
-```bash
-    ls /home/hack/copiar; ls /home/hack/pegar
-```
-
-### Start service and check its' status
-```bash
-    sudo systemctl start gurgui  
-    sudo systemctl status gurgui
-```
-### Check copy from & copy to paths after starting the service
-```bash
-    ls /home/hack/copiar; ls /home/hack/pegar
-```
