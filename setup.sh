@@ -17,7 +17,7 @@ while true; do
     break
   fi
 done
-print "Path to copy: "
+printf "Path to copy: "
 read -r rutaCopia
 if [[ ! -e $rutaCopia || ! -d $rutaCopia ]]; then
   printf "[!] Path %s does not exist\nCreate y/n: " "$rutaCopia"
