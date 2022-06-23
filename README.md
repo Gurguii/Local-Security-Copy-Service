@@ -1,35 +1,54 @@
 
-# Requirements
-You must have rsync installed => sudo apt install rsync (Ubuntu)
+# Local security copy service
 
-# ~ Quick guide ~
-# Download the repository
-sudo git clone https://github.com/Gurguii/Local-Security-Copy-Service  
+[Linux] - Creates a service which will make a copy of a given file/directory into desired path. Along with some logs with the date of the copy and what's being copied
 
-# Get into the repo directory
-cd Local-Security-Copy-Service  
-
-![imagen](https://user-images.githubusercontent.com/101645735/174479659-133ace4c-be76-40e7-b1d4-ab2224faba2c.png)
+## Requirements
+rsync: lets you transfer files and directories to local and remote destinations.  
 
 
-# Execute setup.sh with privileges and give necessary info about the service
-sudo bash setup.sh  
 
-![imagen](https://user-images.githubusercontent.com/101645735/174479735-6becbe25-1eff-4236-84f4-95c6f36fe756.png)
 
-# Result
-We are now left with 2 visible directories and the setup.sh file (not counting README and LICENSE):   
 
-deleteServices => Has a script for each service <ServiceName.sh>. By executing it, every file created for that service will be deleted.
 
-servicesLogs => Has a directory for each created service which will store the service's logs. Each log file has the $date of the copy and some info about the copy made.  
+## Run locally
 
-![imagen](https://user-images.githubusercontent.com/101645735/174480755-648cf46a-c767-46ec-8889-dd85cfafeddf.png)
+Clone the project
 
-.servicesScripts => This directory will be left hidden (notice the . right before the name). It will store the service script <ServiceName.sh>.
+```bash
+  sudo git clone https://github.com/Gurguii/Local-Security-Copy-Service
+```
+Go to the project directory
+```bash
+    cd Local-Security-Copy-Service
+```
+Run the setup script with sudo privileges
+```bash
+    sudo bash setup.sh
+```
+You will be asked a few questions about the service such as paths to copy from/to.  
+In case path doesn't exist, the script is able to create those missing directories, you will be asked before creating any directory.
+## File explanation
+If you have ran setup.sh at least once you will notice 2 new directories: servicesLogs & deleteServices.  
+- servicesLogs: stores a directory for each service created whose content will be an incremental file list
+- deleteServices: stores a script for each service created which will delete every file created by setup.sh for that service.
+# Testing it
+### Running the script and filling asked info
+```bash
+    sudo bash setup.sh
+```
 
-# How to start/stop/check status of a service
-Given a service called <gurgui>  
-sudo systemctl < start | stop | check > <ServiceName> 
-Note: As long as I know you don't have to add .service
-  sudo systemctl start gurgui.service == sudo systemctl start gurgui
+### Check copy from & copy to paths before starting the service
+```bash
+    ls /home/hack/copiar; ls /home/hack/pegar
+```
+
+### Start service and check its' status
+```bash
+    sudo systemctl start gurgui  
+    sudo systemctl status gurgui
+```
+### Check copy from & copy to paths after starting the service
+```bash
+    ls /home/hack/copiar; ls /home/hack/pegar
+```
